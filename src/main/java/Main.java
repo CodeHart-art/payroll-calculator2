@@ -1,39 +1,45 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String filePath = "C:\\Users\\john1\\pluralsight\\workbook-3\\payroll-calculator\\src\\main\\resources\\employees.csv";
+        System.out.print("Enter the name of the file employee file to process: ");
+        String rawFile = scanner.nextLine();
+        String rawPath = "src/main/resources/" + rawFile;
 
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+        System.out.print("Enter the name of the payroll file to create: ");
+        String processedFile = scanner.nextLine();
+        String processedPath = "src/main/resources/" + processedFile;
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(rawPath));
+             FileWriter fileWriter = new FileWriter(processedPath)) {
+
+            fileWriter.write("id|name|gross pay\n");
+
 
             String line;
             bufferedReader.readLine();
-            while ((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
 
                 String[] parts = line.split("\\|");
 
                 int id = Integer.parseInt(parts[0]);
                 String name = parts[1];
                 double hours = Double.parseDouble(parts[2]);
-                double wage =Double.parseDouble(parts[3]);
+                double wage = Double.parseDouble(parts[3]);
 
 
-                Employees employees = new Employees(id,name,hours,wage);
+                Employees employees = new Employees(id, name, hours, wage);
 
-                System.out.println(employees.getId());
-                System.out.println(employees.getName());
-                System.out.println(employees.grossPay());
 
+                fileWriter.write(employees.getId() + "|" + employees.getName() + "|" + employees.grossPay()+ "\n") ;
 
             }
 
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
