@@ -24,15 +24,14 @@ public class Main {
 
                 Employees employees = new Employees(id,name,hours,wage);
 
+                employees.getId();
+                employees.getName();
+                employees.grossPay();
+
+
             }
 
 
-
-
-
-        }
-        catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
         catch (IOException e) {
             throw new RuntimeException(e);

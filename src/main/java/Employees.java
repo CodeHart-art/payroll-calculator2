@@ -29,7 +29,7 @@ public class Employees {
     }
     //endregion End getters
 
-    public double grossPay(double hoursWorked,double payRate){
-        return hoursWorked * payRate;
+    public double grossPay(){
+        return this.hoursWorked * this.payRate;
     }
 }
