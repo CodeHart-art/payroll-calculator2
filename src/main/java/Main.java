@@ -24,9 +24,9 @@ public class Main {
 
                 Employees employees = new Employees(id,name,hours,wage);
 
-                employees.getId();
-                employees.getName();
-                employees.grossPay();
+                System.out.println(employees.getId());
+                System.out.println(employees.getName());
+                System.out.println(employees.grossPay());
 
 
             }
